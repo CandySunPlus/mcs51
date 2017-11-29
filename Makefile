@@ -1,5 +1,6 @@
 CC = sdcc
 PACK = packihx
+ISP = stcgal
 MFLAGS = --std-c11 --model-small
 
 TARGET_DIR = build
@@ -21,3 +22,8 @@ $(addsuffix .ihx,$(BUILD_TARGETS)): $(addsuffix .c,$(OBJECTS))
 .PHONY: clean
 clean:
 	rm -rf $(TARGET_DIR)/*
+
+.PHONY: deploy
+deploy:
+	stcgal -p ${p} -t ${t}
+
