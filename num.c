@@ -1,4 +1,4 @@
-#include <mcs51/stc12.h>
+#include <stc12.h>
 
 void main()
 {

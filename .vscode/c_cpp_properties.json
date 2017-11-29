@@ -8,14 +8,13 @@
                 "${workspaceRoot}"
             ],
             "defines": [
-                "__code=const",
-                "__sbit=int",
-                "__at="
+                "__code=const"
             ],
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
-                    "/usr/local/share/sdcc/include/*",
+                    "/usr/local/share/sdcc/include",
+                    "/usr/local/share/sdcc/include/mcs51",
                     "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
