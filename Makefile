@@ -12,18 +12,15 @@ all: $(addsuffix .hex,$(BUILD_TARGETS))
 
 $(addsuffix .hex,$(BUILD_TARGETS)): $(addsuffix .ihx,$(BUILD_TARGETS))
 	rm -rf $@
-	$(PACK) $< > $@
+	$(PACK) $(addsuffix .ihx,$(basename $@)) > $@
 
 $(addsuffix .ihx,$(BUILD_TARGETS)): $(addsuffix .c,$(OBJECTS))
 	mkdir -p $(dir $@)
-	$(CC) $(MFLAGS) -o $(dir $@) $<
+	$(CC) $(MFLAGS) -o $(dir $@)  $(addsuffix .c,$(notdir $(basename $@)))
 
 
 .PHONY: clean
 clean:
 	rm -rf $(TARGET_DIR)/*
 
-.PHONY: deploy
-deploy:
-	stcgal -p ${p} -t ${t}
 

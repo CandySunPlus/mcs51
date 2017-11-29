@@ -28,16 +28,18 @@
         {
             "name": "Linux",
             "includePath": [
-                "/usr/include",
-                "/usr/local/include",
+                "/usr/local/share/sdcc/include",
+                "/usr/local/share/sdcc/include/mcs51",
                 "${workspaceRoot}"
             ],
-            "defines": [],
+            "defines": [
+                "__code=const"
+            ],
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
-                    "/usr/include",
-                    "/usr/local/include",
+                    "/usr/local/share/sdcc/include",
+                    "/usr/local/share/sdcc/include/mcs51",
                     "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
