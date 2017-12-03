@@ -9,19 +9,23 @@ unsigned int cnt = 0;
 unsigned char T0RH, T0RL;
 
 unsigned char keyState[4] = {1, 1, 1, 1};
+unsigned char buffer[4] = {0x3F, 0x3F, 0x3F, 0x3F};
 unsigned char __code KEY_CODE[] = { 0x01, 0x02, 0x03, 0x04 };
+unsigned char __code chars[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
 
 void configTimer0(unsigned int ms);
 void keyAction(unsigned char action);
 void keyScan();
 void keyDriver();
+void ledScan();
+void showNum(unsigned int num);
 
 void main()
 {
-
     EA = 1;  // 中断使然总开关
     configTimer0(1); // 1ms 中断
     P1 = 0xFE;
+    P2 &= 0x0F; // 低4位不变，高4位清零
 
     while (1)
     {
@@ -69,6 +73,7 @@ void keyDriver() {
 
 void keyAction(unsigned char action) {
     static unsigned char i = 0;
+    static unsigned int j = 0;
     if (action == KEY_CODE[0] || action == KEY_CODE[1]) {
         i = action == KEY_CODE[0] ? i + 1 : i - 1;
         // 溢出后为 0xFF
@@ -77,8 +82,27 @@ void keyAction(unsigned char action) {
         i = i & 0x07;
         P1 = ~(0x01 << i);
     } else if (action == KEY_CODE[2] || action == KEY_CODE[3]) {
-        NOP();
+        j = action == KEY_CODE[2] ? j + 1 : j - 1;
+        // 最大到 9999
+        j = j > 9999 ? 0 : j;
+        showNum(j);
     }
+}
+
+void showNum(unsigned int num) {
+    buffer[0] = chars[num / 1000 % 10];
+    buffer[1] = chars[num / 100 % 10];
+    buffer[2] = chars[num / 10 % 10];
+    buffer[3] = chars[num % 10];
+}
+
+void ledScan() {
+    static unsigned char i = 0;
+
+    P2 &= 0x0F;
+    P0 = buffer[i];
+    P2 |= (0x10 << i); // 高位位移，开启开关
+    i = ++i & 0x03; // 0x00 ... 0x03，到4归0
 }
 
 void keyScan() {
@@ -105,4 +129,5 @@ void interruptTimer0() __interrupt(1)
     TH0 = T0RH;
     TL0 = T0RL;
     keyScan();
+    ledScan();
 }
