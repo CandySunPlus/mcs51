@@ -1,15 +1,5 @@
 #include <stc12.h>
 
-/**
- * For 11.0592MHz 晶振
- * 硬件时钟 12/11059200
- * 
- * 12x/11059200 = 0.001
- * 12x = 11059.2
- * x = 11059.2 / 12 
- * x = 921
- */
-
 unsigned int cnt = 0;
 unsigned char __code chars[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
 unsigned char buffer[4] = {0x00, 0x00, 0x00, 0x00};
@@ -41,6 +31,15 @@ void main()
     }
 }
 
+/**
+ * For 11.0592MHz 晶振
+ * 硬件时钟 12/11059200
+ * 
+ * 12x/11059200 = 0.001
+ * 12x = 11059.2
+ * x = 11059.2 / 12 
+ * x = 921
+ */
 void configTimer0(unsigned int ms)
 {
     unsigned long tmp;
