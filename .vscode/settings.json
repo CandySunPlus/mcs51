@@ -1,4 +1,7 @@
 {
     "C_Cpp.intelliSenseEngine": "Default",
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "stc12.h": "c"
+    }
 }
