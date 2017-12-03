@@ -11,7 +11,7 @@ unsigned char T0RH, T0RL;
 unsigned char keyState[4] = {1, 1, 1, 1};
 unsigned char buffer[4] = {0x3F, 0x3F, 0x3F, 0x3F};
 unsigned char __code KEY_CODE[] = { 0x01, 0x02, 0x03, 0x04 };
-unsigned char __code chars[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
+unsigned char __code CHARS[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
 
 void configTimer0(unsigned int ms);
 void keyAction(unsigned char action);
@@ -90,10 +90,10 @@ void keyAction(unsigned char action) {
 }
 
 void showNum(unsigned int num) {
-    buffer[0] = chars[num / 1000 % 10];
-    buffer[1] = chars[num / 100 % 10];
-    buffer[2] = chars[num / 10 % 10];
-    buffer[3] = chars[num % 10];
+    buffer[0] = CHARS[num / 1000 % 10];
+    buffer[1] = CHARS[num / 100 % 10];
+    buffer[2] = CHARS[num / 10 % 10];
+    buffer[3] = CHARS[num % 10];
 }
 
 void ledScan() {
