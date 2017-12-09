@@ -4,7 +4,7 @@ ISP = stcgal
 MFLAGS = --std-c11 --model-small
 
 TARGET_DIR = build
-OBJECTS = led num key
+OBJECTS = led num key ir
 
 BUILD_TARGETS := $(foreach n,$(OBJECTS),$(addprefix $(TARGET_DIR)/$(n)/,$(n)))
 

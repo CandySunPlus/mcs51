@@ -2,6 +2,8 @@
     "C_Cpp.intelliSenseEngine": "Default",
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "stc12.h": "c"
+        "stc12.h": "c",
+        "compiler.h": "c",
+        "8051.h": "c"
     }
 }
